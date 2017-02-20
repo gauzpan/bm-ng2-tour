@@ -1,0 +1,11 @@
+*.ts
+!*.d.ts
+dist
+typings
+.idea
+node_modules
+webpack*
+tsconfig.*
+tslint.json
+/bin
+demo
