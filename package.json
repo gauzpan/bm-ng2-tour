@@ -1,11 +1,9 @@
 {
   "name": "bm-ng2-tour",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "Product Tour or walkthrough of webapp",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "bm-ng2-tour.js",
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gauzpan/bm-ng2-tour.git"
@@ -80,7 +78,9 @@
     "deploy:demo": "npm run webpack-prod && gh-pages -d dist",
     "deploy:npm": "npm run cleanup  && npm publish",
     "webpack": "webpack --config webpack.config.js",
-
+    "preinstall": "npm install autodts",
+    "postinstall": "autodts link",
+    "prepublish": "tsc",
     "webpack-prod": "webpack --config webpack.prod.config.js"
   },
   "author": "Gaurav Pandvia",

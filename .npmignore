@@ -1,6 +1,7 @@
 *.ts
 !*.d.ts
 dist
+index.html
 typings
 .idea
 node_modules
