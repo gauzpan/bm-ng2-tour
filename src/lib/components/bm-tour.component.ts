@@ -33,7 +33,97 @@ import {PositionHelper} from "../utils/position";
     </div>
   `,
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./../utils/test-tour.scss']
+    styles: [`.highlightOnOverlay {
+  position: relative;
+  z-index: 9999;
+  box-shadow: 0 0 7px 4px rgba(245, 165, 35, 0.34);
+  border-radius: 4px; }
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1040 !important;
+  content: ""; }
+
+.bm-tour-content {
+  position: fixed;
+  max-width: 350px;
+  border-radius: 3px;
+  z-index: 5000;
+  display: block;
+  font-weight: normal;
+  opacity: 0;
+  pointer-events: none;
+  background: #fff;
+  color: #3d3d3d;
+  border: 1px solid transparet;
+  font-size: 13px;
+  padding: 15px; }
+  .bm-tour-content .title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px; }
+  .bm-tour-content span.icon-close-tour:after {
+    content: 'x';
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 15px;
+    line-height: 1;
+    top: 12px;
+    right: 10px;
+    cursor: pointer;
+    position: absolute; }
+  .bm-tour-content span.icon-close-tour:hover::after {
+    font-size: 18px;
+    transition: all 0.4s linear; }
+  .bm-tour-content .btn-color {
+    border-radius: 4px;
+    background-color: #36b7a4;
+    float: right;
+    color: white; }
+  .bm-tour-content .tooltip-caret {
+    position: absolute;
+    z-index: 5001;
+    width: 0;
+    height: 0; }
+    .bm-tour-content .tooltip-caret.position-left {
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 7px solid #fff; }
+    .bm-tour-content .tooltip-caret.position-top {
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid #fff; }
+    .bm-tour-content .tooltip-caret.position-right {
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-right: 7px solid #fff; }
+    .bm-tour-content .tooltip-caret.position-bottom {
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 7px solid #fff; }
+  .bm-tour-content .tooltip-caret {
+    position: absolute;
+    z-index: 5001;
+    width: 0;
+    height: 0; }
+  .bm-tour-content.position-right {
+    transform: translate3d(10px, 0, 0); }
+  .bm-tour-content.position-left {
+    transform: translate3d(-10px, 0, 0); }
+  .bm-tour-content.position-top {
+    transform: translate3d(0, -10px, 0); }
+  .bm-tour-content.position-bottom {
+    transform: translate3d(0, 10px, 0); }
+  .bm-tour-content.animate {
+    opacity: 1;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto; }`]
 })
 export class TourContentComponent implements AfterViewInit {
 

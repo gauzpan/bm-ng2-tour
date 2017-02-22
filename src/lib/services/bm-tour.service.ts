@@ -15,9 +15,14 @@ export interface IStepOption {
   stepId?: string;
   spacing ?: number;
   anchorId?: string;
+  nextStepCallback?: any;
+  callbackRef?: any;
   title?: string;
   content?: string;
   route?: string | UrlSegment[];
+  showPrev?: boolean;
+  showNext?: boolean;
+  showFinish?: boolean;
   nextStep?: number | string;
   prevStep?: number | string;
   placement?: 'above' | 'below' | 'after' | 'before' | 'left' | 'right';
@@ -34,13 +39,13 @@ export enum TourState {
 
 @Injectable()
 export class BmTourService{
-  public stepShow$: Subject<IStepOption> = new Subject();
-  public stepHide$: Subject<IStepOption> = new Subject();
+  public stepShow$: Subject<IStepOption> = new Subject<IStepOption>();
+  public stepHide$: Subject<IStepOption> = new Subject<IStepOption>();
   public initialize$: Subject<IStepOption[]> = new Subject<IStepOption[]>();
-  public start$: Subject<IStepOption> = new Subject();
-  public end$: Subject<any> = new Subject();
-  public pause$: Subject<IStepOption> = new Subject();
-  public resume$: Subject<IStepOption> = new Subject();
+  public start$: Subject<IStepOption> = new Subject<IStepOption>();
+  public end$: Subject<any> = new Subject<any>();
+  public pause$: Subject<IStepOption> = new Subject<IStepOption>();
+  public resume$: Subject<IStepOption> = new Subject<IStepOption>();
   public anchorRegister$: Subject<string> = new Subject<string>();
   public anchorUnregister$: Subject<string> = new Subject<string>();
   //Flatten Observables
@@ -60,7 +65,7 @@ export class BmTourService{
   public currentStep: IStepOption;
 
   public anchors: { [anchorId: string]: BmTourAnchorDirective } = {};
-  private status: TourState = TourState.OFF;
+  public status: TourState = TourState.OFF;
 
   //Anchors place
 
@@ -80,16 +85,20 @@ export class BmTourService{
 
   public startAt(stepId: number | string): void {
     this.goToStep(this.loadStep(stepId));
-    this.start$.next();
     this.status = TourState.ON;
+    this.start$.next();
     // this.setHotkeys();
   }
 
   public end(): void {
     this.hideStep(this.currentStep);
     this.currentStep = undefined;
-    this.end$.next();
     this.status = TourState.OFF;
+    let highlightedElems = document.querySelectorAll('.highlightOnOverlay');
+    for(let i=0;i<highlightedElems.length;i++){
+      highlightedElems[i].classList.remove('highlightOnOverlay');
+    }
+    this.end$.next();
     // this.removeHotkeys();
   }
 
@@ -145,7 +154,7 @@ export class BmTourService{
 
   public register(anchorId: string, anchor: any): void {
     if (this.anchors[anchorId]) {
-      throw 'anchorId ' + anchorId + ' already registered!';
+      return;
     }
     this.anchors[anchorId] = anchor;
     this.anchorRegister$.next(anchorId);
@@ -172,6 +181,9 @@ export class BmTourService{
     if (!step) {
       this.end();
       return;
+    }
+    if(this.currentStep && this.currentStep.nextStepCallback){
+      this.currentStep.nextStepCallback.call(this.currentStep.callbackRef);
     }
     let navigatePromise: Promise<boolean> = new Promise(resolve => resolve(true));
     if (step.route !== undefined && typeof (step.route) === 'string') {
@@ -204,7 +216,7 @@ export class BmTourService{
     this.showStep(this.currentStep);
   }
 
-  private showStep(step: IStepOption): void {
+  public showStep(step: IStepOption): void {
     const anchor = this.anchors[step.anchorId];
     if (!anchor) {
       this.end();
@@ -214,7 +226,7 @@ export class BmTourService{
     // this.stepShow$.next(step);
   }
 
-  private hideStep(step: IStepOption): void {
+  public hideStep(step: IStepOption): void {
     const anchor = this.anchors[step.anchorId];
     if (!anchor) {
       return;

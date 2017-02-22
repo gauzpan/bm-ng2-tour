@@ -9,13 +9,13 @@ import {TourStepTemplateService} from "../services/tour-step-template.service";
   styles: ['body { max-height: 100vh; }'],
   template: `
      <template #tourStep let-step="step">
-     <span class="icon-close" (click)="tourService.end()"></span>
+     <span class="icon-close-tour" (click)="tourService.end()"></span>
      <p class="title"> {{step?.title}}</p>
       <p class="tour-step-content ">{{step?.content}}</p>
       <div class="tour-step-navigation">
-        <button *ngIf="tourService.hasPrev(step)" class="btn btn-sm btn-default" (click)="tourService.prev()">« Prev</button>
-        <button *ngIf="tourService.hasNext(step)" class="btn-color btn btn-sm btn-default" (click)="tourService.next()">Next »</button>
-       
+        <button *ngIf="step.showPrev && tourService.hasPrev(step)" class="btn btn-sm btn-default" (click)="tourService.prev()">« Prev</button>
+        <button *ngIf="step.showNext && tourService.hasNext(step)" class="btn-color btn btn-sm btn-default" (click)="tourService.next()">Next »</button>
+        <button *ngIf="step.showFinish" class="btn-color btn btn-sm" (click)="tourService.end()">Finish Tour</button>
       </div>
     </template>
   `,

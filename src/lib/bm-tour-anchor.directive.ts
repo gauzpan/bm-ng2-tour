@@ -164,7 +164,9 @@ export default class BmTourAnchorDirective implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.tourService.unregister(this.bmTourAnchor);
+    if(this.tourService.status == 0) {
+      this.tourService.unregister(this.bmTourAnchor);
+    }
     this.hideTourStep();
   }
 

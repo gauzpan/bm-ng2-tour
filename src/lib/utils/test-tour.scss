@@ -52,7 +52,7 @@ $popover-spacing: 10px;
   }
 
       span.icon-close{
-        &:after {
+        &:before {
           content: 'x';
           font-weight: bold;
           font-family: sans-serif;

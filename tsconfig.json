@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "outDir": "./",
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
+    "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -11,11 +13,15 @@
     "types": [
       "node"
     ],
+
     "lib": [
       "dom",
       "es6"
     ]
   },
+  "files": [
+    "./bm-ng2-tour.ts"
+  ],
   "exclude": [
     "node_modules",
     "dist"

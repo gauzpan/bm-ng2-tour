@@ -1,6 +1,6 @@
 {
   "name": "bm-ng2-tour",
-  "version": "1.0.8",
+  "version": "1.0.22",
   "description": "Product Tour or walkthrough of webapp",
   "main": "bm-ng2-tour.js",
 
@@ -65,7 +65,7 @@
       "zone.js": "^0.7.6"
     },
   "scripts": {
-    "cleanup": "rimraf build dist src/**/*.ngfactory.ts src/**/*.shim.ts src/**/*.js src/**/*.js.map src/**/*.js src/**/*.d.ts src/**/*.ngsummary.json",
+    "cleanup": "rimraf build dist src/**/*.ngfactory.ts src/**/*.shim.ts src/**/*.js src/**/*.js.map src/**/*.js  src/**/*.ngsummary.json",
     "explorer": "source-map-explorer ./dist/bootstrap.bundle.js ./dist/bootstrap.bundle.js.map",
 
 

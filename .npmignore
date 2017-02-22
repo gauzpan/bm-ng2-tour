@@ -1,12 +1,17 @@
+
+# Node generated files
+node_modules
+npm-debug.log
+# OS generated files
+Thumbs.db
+.DS_Store
+# Ignored files
 *.ts
 !*.d.ts
+
 dist
-index.html
 typings
 .idea
-node_modules
-webpack*
-tsconfig.*
-tslint.json
 /bin
 demo
+webpack*

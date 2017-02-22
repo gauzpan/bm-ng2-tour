@@ -258,18 +258,18 @@ export class PositionHelper {
 
     if (placement === PlacementTypes.right) {
       left = hostDim.left + hostDim.width + spacing;
-      top = window.pageYOffset + PositionHelper.calculateVerticalAlignment(
+      top = document.documentElement.scrollTop + PositionHelper.calculateVerticalAlignment(
         hostDim, elmDim, alignment);
     } else if (placement === PlacementTypes.left) {
       left = hostDim.left - elmDim.width - spacing;
-      top = window.pageYOffset + PositionHelper.calculateVerticalAlignment(
+      top = document.documentElement.scrollTop + PositionHelper.calculateVerticalAlignment(
         hostDim, elmDim, alignment);
     } else if (placement === PlacementTypes.top) {
-      top =  window.pageYOffset + (hostDim.top - elmDim.height - spacing);
+      top =  document.documentElement.scrollTop + (hostDim.top - elmDim.height - spacing);
       left = PositionHelper.calculateHorizontalAlignment(
         hostDim, elmDim, alignment);
     } else if (placement === PlacementTypes.bottom) {
-      top = window.pageYOffset + (hostDim.top + hostDim.height + spacing);
+      top = document.documentElement.scrollTop + (hostDim.top + hostDim.height + spacing);
       left = PositionHelper.calculateHorizontalAlignment(
         hostDim, elmDim, alignment);
     }
