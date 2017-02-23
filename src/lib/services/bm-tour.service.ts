@@ -22,6 +22,7 @@ export interface IStepOption {
   route?: string | UrlSegment[];
   showPrev?: boolean;
   showNext?: boolean;
+  showCursor?: boolean;
   showFinish?: boolean;
   nextStep?: number | string;
   prevStep?: number | string;
@@ -97,6 +98,7 @@ export class BmTourService{
     let highlightedElems = document.querySelectorAll('.highlightOnOverlay');
     for(let i=0;i<highlightedElems.length;i++){
       highlightedElems[i].classList.remove('highlightOnOverlay');
+      highlightedElems[i].classList.remove('showCursorPointer');
     }
     this.end$.next();
     // this.removeHotkeys();

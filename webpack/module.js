@@ -35,7 +35,6 @@ module.exports = {
 
     {
       test: /initial\.scss$/,
-      exclude: [path.resolve(process.cwd(), 'src', 'demo'), path.resolve(process.cwd(), 'src', 'lib')],
       loader: ExtractTextPlugin.extract({
         fallbackLoader: 'style-loader',
         loader: 'css-loader!sass-loader?sourceMap'

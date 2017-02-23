@@ -9,7 +9,7 @@ import {TourStepTemplateService} from "../services/tour-step-template.service";
   styles: ['body { max-height: 100vh; }'],
   template: `
      <template #tourStep let-step="step">
-     <span class="icon-close-tour" (click)="tourService.end()"></span>
+     <span class="close-tour" (click)="tourService.end()"></span>
      <p class="title"> {{step?.title}}</p>
       <p class="tour-step-content ">{{step?.content}}</p>
       <div class="tour-step-navigation">

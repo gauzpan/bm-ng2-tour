@@ -35,9 +35,17 @@ import {PositionHelper} from "../utils/position";
     encapsulation: ViewEncapsulation.None,
     styles: [`.highlightOnOverlay {
   position: relative;
-  z-index: 9999;
+  z-index: 4999;
   box-shadow: 0 0 7px 4px rgba(245, 165, 35, 0.34);
   border-radius: 4px; }
+  .showCursorPointer:before{
+    font-family: FontAwesome;
+    content: "\\f25a";
+    position: absolute;
+    color: #3d3d3d;
+    font-size: 18px;
+    font-weight: bolder;
+    bottom: -12px;}
 
 .overlay {
   background-color: rgba(0, 0, 0, 0.5);
@@ -51,7 +59,7 @@ import {PositionHelper} from "../utils/position";
 
 .bm-tour-content {
   position: fixed;
-  max-width: 350px;
+  max-width: 400px;
   border-radius: 3px;
   z-index: 5000;
   display: block;
@@ -60,26 +68,33 @@ import {PositionHelper} from "../utils/position";
   pointer-events: none;
   background: #fff;
   color: #3d3d3d;
-  border: 1px solid transparet;
+  box-shadow: 0 0 4px 1px #ebeeee;
+  border: 1px solid transparent;
   font-size: 13px;
   padding: 15px; }
   .bm-tour-content .title {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 1.8rem;
     margin-bottom: 10px; }
-  .bm-tour-content span.icon-close-tour:after {
+  .bm-tour-content .tour-step-content {
+    color: #979797;
+    margin-right: 10px;
+    font-size: 1.4rem; }
+  .bm-tour-content span.close-tour:before {
     content: 'x';
     font-weight: bold;
     font-family: sans-serif;
     font-size: 15px;
+    color: #979797;
     line-height: 1;
     top: 12px;
     right: 10px;
     cursor: pointer;
     position: absolute; }
-  .bm-tour-content span.icon-close-tour:hover::after {
-    font-size: 18px;
-    transition: all 0.4s linear; }
+  .bm-tour-content span.close-tour:hover::after {
+    font-size: 15px;
+    color: #36b7a4;
+    transition: all 0.2s linear; }
   .bm-tour-content .btn-color {
     border-radius: 4px;
     background-color: #36b7a4;
@@ -130,6 +145,7 @@ export class TourContentComponent implements AfterViewInit {
     @Input() host: ElementRef;
     @Input() context : any;
     @Input() showCaret: boolean = true;
+    @Input() showCursor: boolean = false;
     @Input() placement: PlacementTypes;
     @Input() spacing: number;
     @Input() cssClass: string;
@@ -167,8 +183,12 @@ export class TourContentComponent implements AfterViewInit {
         let highlightedElems = document.querySelectorAll('.highlightOnOverlay');
         for(let i=0;i<highlightedElems.length;i++){
             highlightedElems[i].classList.remove('highlightOnOverlay');
+            highlightedElems[i].classList.remove('showCursorPointer');
         }
         this.renderer.setElementClass(this.host.nativeElement,'highlightOnOverlay',true);
+        if(this.showCursor){
+            this.renderer.setElementClass(this.host.nativeElement,'showCursorPointer',true);
+        }
         const hostDim = this.host.nativeElement.getBoundingClientRect();
 
         // if no dims were found, never show

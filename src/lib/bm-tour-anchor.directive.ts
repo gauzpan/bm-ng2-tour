@@ -32,6 +32,7 @@ export default class BmTourAnchorDirective implements OnInit,OnDestroy {
   alignment: any = "left";
   spacing: number = 5;
   showCaret: boolean = true;
+  showCursor: boolean = false;
 
   private component: any;
   private timeout: any;
@@ -61,9 +62,9 @@ export default class BmTourAnchorDirective implements OnInit,OnDestroy {
 
 
   public showTourStep(step: IStepOption): void {
-    console.log(step);
     this.stepContext = step;
     this.popoverTemplate = this.tourStepTemplate.template;
+    this.showCursor = step.showCursor;
     if(step.title)
       this.popoverTitle = step.title;
     if(step.alignment)
@@ -132,6 +133,7 @@ export default class BmTourAnchorDirective implements OnInit,OnDestroy {
       placement: this.placement,
       alignment: this.alignment,
       showCaret: this.showCaret,
+      showCursor: this.showCursor,
       cssClass: "myClass",
       spacing: this.spacing,
       context: this.stepContext
