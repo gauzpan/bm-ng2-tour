@@ -11,7 +11,7 @@ import {TourStepTemplateService} from "../services/tour-step-template.service";
      <template #tourStep let-step="step">
      <span class="close-tour" (click)="tourService.end()"></span>
      <p class="title"> {{step?.title}}</p>
-      <p class="tour-step-content ">{{step?.content}}</p>
+      <p class="tour-step-content " [innerHTML]="step.content"></p>
       <div class="tour-step-navigation">
         <button *ngIf="step.showPrev && tourService.hasPrev(step)" class="btn btn-sm btn-default" (click)="tourService.prev()">« Prev</button>
         <button *ngIf="step.showNext && tourService.hasNext(step)" class="btn-color btn btn-sm btn-default" (click)="tourService.next()">Next »</button>
