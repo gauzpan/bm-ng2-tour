@@ -26,7 +26,7 @@ export interface IStepOption {
   showFinish?: boolean;
   nextStep?: number | string;
   prevStep?: number | string;
-  placement?: 'above' | 'below' | 'after' | 'before' | 'left' | 'right';
+  placement?: 'above' | 'top' | 'bottom' | 'below' | 'after' | 'before' | 'left' | 'right';
   preventScrolling?: boolean;
   alignment?: string;
   showCaret?: boolean;
