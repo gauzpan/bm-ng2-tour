@@ -73,7 +73,7 @@ export class DemoComponent {
       title: 'Placement',
     }, {
       anchorId: 'config.placement.default',
-      content: 'Sliiide to the left.',
+      content: 'Slide to the left.',
       placement: 'left',
       title: 'Placement',
     }, {

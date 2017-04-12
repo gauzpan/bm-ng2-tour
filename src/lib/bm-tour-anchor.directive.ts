@@ -76,9 +76,11 @@ export default class BmTourAnchorDirective implements OnInit,OnDestroy {
     this.container = 'body';
     switch (step.placement) {
       case 'above':
+      case 'top':
         this.placement = 'top';
         break;
       case 'below':
+      case 'bottom':
         this.placement = 'bottom';
         break;
       case 'right':

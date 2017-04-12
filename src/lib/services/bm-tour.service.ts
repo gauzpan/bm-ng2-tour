@@ -224,7 +224,11 @@ export class BmTourService{
       this.end();
       return;
     }
-    anchor.showTourStep(step);
+    if(this.status != 0) {
+      anchor.showTourStep(step);
+    }else{
+      return;
+    }
     // this.stepShow$.next(step);
   }
 

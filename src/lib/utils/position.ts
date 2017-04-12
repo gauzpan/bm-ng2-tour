@@ -274,6 +274,10 @@ export class PositionHelper {
         hostDim, elmDim, alignment);
     }
 
+    //If it goes out of window, since position of popup is fixed.
+    if(left < 0){left = 0};
+    if(top < 0){top = 0};
+
     return { top, left };
   }
 
