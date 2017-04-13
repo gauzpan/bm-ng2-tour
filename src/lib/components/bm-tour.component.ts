@@ -58,9 +58,7 @@ import {PositionHelper} from "../utils/position";
   content: ""; }
 
 .bm-tour-content {
-      position: fixed;
-    overflow: visible;
-    clear: both;
+  position: fixed;
   max-width: 400px;
   border-radius: 3px;
   z-index: 5000;
