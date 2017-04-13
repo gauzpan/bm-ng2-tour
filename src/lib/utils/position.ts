@@ -221,19 +221,19 @@ export class PositionHelper {
     if (placement === PlacementTypes.right) {
       left = -7;
       top = PositionHelper.calculateVerticalCaret(
-        hostDim, elmDim, caretDimensions, alignment);
+          hostDim, elmDim, caretDimensions, alignment);
     } else if (placement === PlacementTypes.left) {
-      left = elmDim.width;
+      left = elmDim.width - 1;
       top = PositionHelper.calculateVerticalCaret(
-        hostDim, elmDim, caretDimensions, alignment);
+          hostDim, elmDim, caretDimensions, alignment);
     } else if (placement === PlacementTypes.top) {
-      top = elmDim.height;
+      top = elmDim.height - 1;
       left = PositionHelper.calculateHorizontalCaret(
-        hostDim, elmDim, caretDimensions, alignment);
+          hostDim, elmDim, caretDimensions, alignment);
     } else if (placement === PlacementTypes.bottom) {
       top = -7;
       left = PositionHelper.calculateHorizontalCaret(
-        hostDim, elmDim, caretDimensions, alignment);
+          hostDim, elmDim, caretDimensions, alignment);
     }
 
     return { top, left };
@@ -259,19 +259,19 @@ export class PositionHelper {
     if (placement === PlacementTypes.right) {
       left = hostDim.left + hostDim.width + spacing;
       top = document.documentElement.scrollTop + PositionHelper.calculateVerticalAlignment(
-        hostDim, elmDim, alignment);
+              hostDim, elmDim, alignment);
     } else if (placement === PlacementTypes.left) {
       left = hostDim.left - elmDim.width - spacing;
       top = document.documentElement.scrollTop + PositionHelper.calculateVerticalAlignment(
-        hostDim, elmDim, alignment);
+              hostDim, elmDim, alignment);
     } else if (placement === PlacementTypes.top) {
       top =  document.documentElement.scrollTop + (hostDim.top - elmDim.height - spacing);
       left = PositionHelper.calculateHorizontalAlignment(
-        hostDim, elmDim, alignment);
+          hostDim, elmDim, alignment);
     } else if (placement === PlacementTypes.bottom) {
       top = document.documentElement.scrollTop + (hostDim.top + hostDim.height + spacing);
       left = PositionHelper.calculateHorizontalAlignment(
-        hostDim, elmDim, alignment);
+          hostDim, elmDim, alignment);
     }
 
     //If it goes out of window, since position of popup is fixed.
@@ -296,11 +296,11 @@ export class PositionHelper {
    */
   static determinePlacement(placement, elmDim, hostDim, spacing, alignment): any {
     const shouldFlip = PositionHelper.shouldFlip(
-      hostDim,
-      elmDim,
-      placement,
-      alignment,
-      spacing);
+        hostDim,
+        elmDim,
+        placement,
+        alignment,
+        spacing);
 
     if(shouldFlip) {
       if (placement === PlacementTypes.right) {

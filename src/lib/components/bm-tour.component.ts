@@ -58,7 +58,9 @@ import {PositionHelper} from "../utils/position";
   content: ""; }
 
 .bm-tour-content {
-  position: fixed;
+      position: fixed;
+    overflow: visible;
+    clear: both;
   max-width: 400px;
   border-radius: 3px;
   z-index: 5000;
@@ -194,10 +196,10 @@ export class TourContentComponent implements AfterViewInit {
         // if no dims were found, never show
         if(!this.host.nativeElement && !hostDim.height && !hostDim.width) return;
 
-        const elmDim = nativeElm.getBoundingClientRect();
+        let elmDim = nativeElm.getBoundingClientRect();
         this.checkFlip(hostDim, elmDim);
         this.positionContent(nativeElm, hostDim, elmDim);
-
+        elmDim = nativeElm.getBoundingClientRect(); // Updated nativElm Dimenssions after above function
         if(this.showCaret) {
             this.positionCaret(hostDim, elmDim);
         }
@@ -206,6 +208,12 @@ export class TourContentComponent implements AfterViewInit {
         setTimeout(() => this.renderer.setElementClass(nativeElm, 'animate', true), 1);
     }
 
+    /**
+     *
+     * @param nativeElm -- Tour Content Box
+     * @param hostDim -- Host Anchor element dimensions
+     * @param elmDim --  Tour Content Box dimensions
+     */
     positionContent(nativeElm, hostDim, elmDim): void {
         const { top, left } = PositionHelper.positionContent(
             this.placement, elmDim, hostDim, this.spacing, this.alignment);
@@ -213,6 +221,13 @@ export class TourContentComponent implements AfterViewInit {
         // this.renderer.setElementStyle(nativeElm, 'margin-'+this.oppositePos(this.placement), `15px`);
         this.renderer.setElementStyle(nativeElm, 'top', `${top}px`);
         this.renderer.setElementStyle(nativeElm, 'left', `${left}px`);
+
+        //Adjusting position of box, after resizing
+        let newElmDim = nativeElm.getBoundingClientRect();
+        if((this.placement == 'left' && newElmDim.right > hostDim.left) ||
+            this.placement == 'right' && newElmDim.left < hostDim.right){
+            this.positionContent(nativeElm,hostDim,newElmDim);
+        }
     }
 
     positionCaret(hostDim, elmDim): void {
