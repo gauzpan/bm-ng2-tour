@@ -222,8 +222,8 @@ export class TourContentComponent implements AfterViewInit {
 
         //Adjusting position of box, after resizing
         let newElmDim = nativeElm.getBoundingClientRect();
-        if((this.placement == 'left' && newElmDim.right > hostDim.left) ||
-            this.placement == 'right' && newElmDim.left < hostDim.right){
+        if((this.placement === PlacementTypes.left && newElmDim.right > hostDim.left) ||
+            this.placement === PlacementTypes.right && newElmDim.left < hostDim.right){
             this.positionContent(nativeElm,hostDim,newElmDim);
         }
     }
