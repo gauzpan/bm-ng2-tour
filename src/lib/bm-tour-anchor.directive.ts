@@ -16,7 +16,7 @@ import {
 import {BmTourService, IStepOption} from "./services/bm-tour.service";
 import {TourContentService} from "./services/tour-content.service";
 
-const scrollIntoViewIfNeeded = require('scroll-into-view-if-needed');
+const scrollIntoViewIfNeeded = require('scroll-into-view-if-needed').default;
 
 @Directive({
   selector: '[bmTourAnchor]',
