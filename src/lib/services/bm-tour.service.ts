@@ -43,6 +43,8 @@ export class BmTourService{
   public stepShow$: Subject<IStepOption> = new Subject<IStepOption>();
   public stepHide$: Subject<IStepOption> = new Subject<IStepOption>();
   public initialize$: Subject<IStepOption[]> = new Subject<IStepOption[]>();
+  public initiateStep$: Subject<IStepOption> = new Subject<IStepOption>();
+
   public start$: Subject<IStepOption> = new Subject<IStepOption>();
   public end$: Subject<any> = new Subject<any>();
   public pause$: Subject<IStepOption> = new Subject<IStepOption>();
@@ -51,15 +53,16 @@ export class BmTourService{
   public anchorUnregister$: Subject<string> = new Subject<string>();
   //Flatten Observables
   public events$: Observable<{ name: string, value: any }> = mergeStatic<{ name: string, value: any }>(
-    map.bind(this.stepShow$)(value => ({ name: 'stepShow', value })),
-    map.bind(this.stepHide$)(value => ({ name: 'stepHide', value })),
-    map.bind(this.initialize$)(value => ({ name: 'initialize', value })),
-    map.bind(this.start$)(value => ({ name: 'start', value })),
-    map.bind(this.end$)(value => ({ name: 'end', value })),
-    map.bind(this.pause$)(value => ({ name: 'pause', value })),
-    map.bind(this.resume$)(value => ({ name: 'resume', value })),
-    map.bind(this.anchorRegister$)(value => ({ name: 'anchorRegister', value })),
-    map.bind(this.anchorUnregister$)(value => ({ name: 'anchorUnregister', value })),
+      map.bind(this.stepShow$)(value => ({ name: 'stepShow', value })),
+      map.bind(this.stepHide$)(value => ({ name: 'stepHide', value })),
+      map.bind(this.initiateStep$)(value => ({ name: 'initiateStep', value })),
+      map.bind(this.initialize$)(value => ({ name: 'initialize', value })),
+      map.bind(this.start$)(value => ({ name: 'start', value })),
+      map.bind(this.end$)(value => ({ name: 'end', value })),
+      map.bind(this.pause$)(value => ({ name: 'pause', value })),
+      map.bind(this.resume$)(value => ({ name: 'resume', value })),
+      map.bind(this.anchorRegister$)(value => ({ name: 'anchorRegister', value })),
+      map.bind(this.anchorUnregister$)(value => ({ name: 'anchorUnregister', value })),
   );
 
   public steps: IStepOption[];
@@ -184,6 +187,8 @@ export class BmTourService{
       this.end();
       return;
     }
+    this.initiateStep$.next(step); //Fire event on next call(Fix for CD)
+
     if(this.currentStep && this.currentStep.nextStepCallback){
       this.currentStep.nextStepCallback.call(this.currentStep.callbackRef);
     }
