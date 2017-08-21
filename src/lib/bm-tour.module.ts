@@ -23,14 +23,6 @@ import {InjectionService} from "./services/injection.service";
   providers: [TourStepTemplateService,TourContentService,InjectionService],
 })
 export class BmTourModule {
-  public static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: BmTourModule,
-      providers: [
-        BmTourService
-      ],
-    };
-  }
 }
 
 export {BmTourAnchorDirective,BmTourService};
