@@ -16,12 +16,11 @@ import {
 import {BmTourService, IStepOption} from "./services/bm-tour.service";
 import {TourContentService} from "./services/tour-content.service";
 
-const scrollIntoViewIfNeeded = require('scroll-into-view-if-needed').default;
 
 @Directive({
   selector: '[bmTourAnchor]',
 })
-export default class BmTourAnchorDirective implements OnInit,OnDestroy {
+export class BmTourAnchorDirective implements OnInit,OnDestroy {
   @Input() bmTourAnchor: string;
 
   stepContext : any;
@@ -97,7 +96,7 @@ export default class BmTourAnchorDirective implements OnInit,OnDestroy {
     let bindingOptions = this.createBoundOptions();
     this.openTourStep();
     if (!step.preventScrolling) {
-      scrollIntoViewIfNeeded(this.element.nativeElement, true);
+      // scrollIntoViewIfNeeded(this.element.nativeElement, true);
     }
   }
 
@@ -105,18 +104,12 @@ export default class BmTourAnchorDirective implements OnInit,OnDestroy {
     if(!this.component) return;
 
     const destroyFn = () => {
-      // remove events
-      // if(this.mouseLeaveContentEvent) this.mouseLeaveContentEvent();
-      // if(this.mouseEnterContentEvent) this.mouseEnterContentEvent();
-      // if(this.documentClickEvent) this.documentClickEvent();
-
-      // emit events
       this.hide.emit(true);
 
       // destroy component
       this.tourContentService.destroy(this.component);
       this.component = undefined;
-    };
+    }
 
     clearTimeout(this.timeout);
     // if(!immediate) {

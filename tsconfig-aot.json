@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "outDir": "./",
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": false,
+    "noEmitHelpers": false,
+    "declaration": true,
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "lib": ["dom", "es2015"],
+    "typeRoots": [
+      "../node_modules/@types"
+    ]
+  },
+  "files": [
+    "./bm-ng2-tour.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+
+  "angularCompilerOptions": {
+    "genDir": "compiled",
+    "skipTemplateCodegen": true
+  }
+}

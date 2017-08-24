@@ -8,7 +8,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {BmTourService} from "./services/bm-tour.service";
 import {RouterModule} from "@angular/router";
-import BmTourAnchorDirective from "./bm-tour-anchor.directive";
+import {BmTourAnchorDirective} from "./bm-tour-anchor.directive";
 import {TourContentService} from "./services/tour-content.service";
 import {TourContentComponent} from "./components/bm-tour.component";
 import {InjectionRegisteryService} from "./services/injection-registry.service";

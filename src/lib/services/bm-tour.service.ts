@@ -8,7 +8,7 @@ import {Subject, Observable} from "rxjs/Rx";
 import { mergeStatic } from 'rxjs/operator/merge';
 import { map } from 'rxjs/operator/map';
 import * as _ from 'lodash';
-import BmTourAnchorDirective from "../bm-tour-anchor.directive";
+import {BmTourAnchorDirective} from "../bm-tour-anchor.directive";
 
 
 export interface IStepOption {

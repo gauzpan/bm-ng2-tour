@@ -24,10 +24,10 @@ import {PositionHelper} from "../utils/position";
       </span>
       <div class="tooltip-content">
       
-          <template
+          <ng-template
             [ngTemplateOutlet]="template"
             [ngOutletContext]="{step : context }">
-          </template>
+          </ng-template>
        
       </div>
     </div>
@@ -163,6 +163,8 @@ export class TourContentComponent implements AfterViewInit {
         this.popoverClass = clz;
         return "popover-content";
     }
+
+    template:any = "";
 
     constructor(
         public element: ElementRef,
